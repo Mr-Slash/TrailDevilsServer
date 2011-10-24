@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.prime.com.tr/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>TrailDevilsServer</title>
+</h:head>
+<h:body>
+	<h:form>
+		<h:messages/>
+		
+		<!-- Menu -->
+￼￼		<p:menubar>
+			<p:menuitem value="Trails Viewer |" url="viewer.jsf" />
+			<p:menuitem value="Trails Synchronizer |" url="syncTrails.jsf" />
+		</p:menubar>
+		<br/>
+		
+		<p:dataTable id="trailsTableId" var="trail" value="#{trailsController.model.trailList}" >
+			
+			<!-- ID -->
+			<p:column>
+				<f:facet name="header">Id</f:facet>
+				<h:outputText value="#{trail.trailId}" />
+			</p:column>
+			
+			<!-- Name -->
+			<p:column>
+				<f:facet name="header">Name</f:facet>
+				<h:inputText value="#{trail.name}" size="40">
+					<p:ajax listener="#{trailsController.updateName}" async="true" update="trailTimestampId" />
+				</h:inputText>
+			</p:column>
+			
+			<!-- Image -->
+			<p:column>
+				<f:facet name="header">Bild</f:facet>
+				<h:outputText value="#{trail.url}" />
+			</p:column>
+			
+			<p:column>
+				<f:facet name="header">Timestamp</f:facet>
+				<h:outputText id="trailTimestampId" value="#{trail.timestamp}" />
+			</p:column>
+		</p:dataTable>
+	</h:form>	
+</h:body>
+</html>
